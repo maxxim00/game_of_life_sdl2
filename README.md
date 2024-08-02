@@ -16,7 +16,7 @@ This project is an implementation of Conway's Game of Life using SDL2 and C. It 
 - Basic implementation for easy understanding and modification.
 - Built with SDL2 for rendering.
 
-![board]([http://url/to/img.png](https://raw.githubusercontent.com/maxxim00/game_of_life_sdl2/main/img/image.jpg))
+![board](http://url/to/img.png](https://raw.githubusercontent.com/maxxim00/game_of_life_sdl2/main/img/image.jpg)
 
 ## Getting Started
 
