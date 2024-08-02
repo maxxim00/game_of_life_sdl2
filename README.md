@@ -4,6 +4,8 @@
 
 This project is an implementation of Conway's Game of Life using SDL2 and C. It provides a graphical simulation of cellular automata, allowing you to observe the evolution of patterns over time based on simple rules.
 
+![board](https://github.com/maxxim00/game_of_life_sdl2/blob/main/img/image.jpg?raw=true)
+
 ### Todo:
 - Add wrap-around feature for the world
 - Optimization
@@ -15,8 +17,6 @@ This project is an implementation of Conway's Game of Life using SDL2 and C. It 
 - Real-time graphical representation of Conway's Game of Life.
 - Basic implementation for easy understanding and modification.
 - Built with SDL2 for rendering.
-
-![board](https://github.com/maxxim00/game_of_life_sdl2/blob/main/img/image.jpg?raw=true)
 
 ## Getting Started
 
