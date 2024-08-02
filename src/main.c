@@ -1,13 +1,11 @@
 #include <SDL2/SDL.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include <math.h>
 #include <time.h>
 
 #include "core.h"
 #include "cell.h"
 #include "screen.h"
-#include "debug.h"
 
 int main() {
   SDL_Init(SDL_INIT_EVERYTHING);
@@ -22,9 +20,6 @@ int main() {
 
   //To run before loop  
   init_cells();
-  //temp_debug_file(f);
-
-  //sandbox
   
   //timing
   Uint64 start, end;

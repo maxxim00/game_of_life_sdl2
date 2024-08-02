@@ -3,15 +3,15 @@
 
 //Draw all the cells
 void draw_cells(SDL_Renderer *renderer) {  
-  for(int i = 0; i < WINDOW_W / SCALE; ++i) {
+//color
+SDL_SetRenderDrawColor(renderer, 7, 7, 7, 255);
+SDL_Rect rect;
+
+for(int i = 0; i < WINDOW_W / SCALE; ++i) {
     for(int j = 0; j < WINDOW_H / SCALE; ++j) {
       
       if(cells[i][j]->state == 1) {
-        //color
-        SDL_SetRenderDrawColor(renderer, 7, 7, 7, 255);
-
         //Set rect
-        SDL_Rect rect;
         rect.x = cells[i][j]->x * SCALE + 1;
         rect.y = cells[i][j]->y * SCALE + 1;
         rect.w = SCALE - 1;

@@ -18,22 +18,20 @@ void update_cell() {
   for(int i = 0; i < WINDOW_H / SCALE; ++i) {
     for(int j = 0; j < WINDOW_W / SCALE; ++j) {
 
-      if(i == 0 || j == 0 || i == WINDOW_H / SCALE - 1 || j == WINDOW_W / SCALE - 1) {
+      if(i == 0 || j == 0 || i == (WINDOW_H / SCALE) - 1 || j == (WINDOW_W / SCALE) - 1) {
       //todo: impl the edge calc
       cells[i][j]->state = cells[i][j]->state; 
-    
       }else {
 
         int alive_neighbors = count_neighbors(i, j);
         apply_rules(alive_neighbors, i, j);
-      }
+      }      
     }
   }
 
 
   for(int i = 0; i < WINDOW_H / SCALE; ++i) {
     for(int j = 0; j < WINDOW_W / SCALE; ++j) {
-
       cells[i][j]->state = next_cells[i][j]->state; 
     }
   }
@@ -61,28 +59,21 @@ int count_neighbors(int x, int y) {
 
   for(int i = -1; i <= 1; ++i) {
     for(int j = -1; j <= 1; ++j) {
-      if (i == 0 && j == 0) continue; // Skip the cell itself
-      int nx = x + i;
-      int ny = y + j;
       // Boundary checks
-      if (nx >= 0 && ny >= 0 && nx < WINDOW_H / SCALE && ny < WINDOW_W / SCALE) {
-        count += cells[nx][ny]->state;
-      }
+      count += cells[x + i][y + j]->state;
     }
   }
+
+  count -= cells[x][y]->state;
 
   return count;
 }
 
 void apply_rules(int neighbors, int x, int y) {
-  
   if(cells[x][y]->state == 0 && neighbors == 3) {
     next_cells[x][y]->state = 1;
   } 
   else if(cells[x][y]->state == 1 && (neighbors < 2 || neighbors > 3)) {
     next_cells[x][y]->state = 0;
-  }
-  else {
-    next_cells[x][y]->state = cells[x][y]->state;
   }
 }

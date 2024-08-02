@@ -1,13 +1,13 @@
 #ifndef CELL_H
 #define CELL_H
 
-#define WINDOW_W  1000 
-#define WINDOW_H  1000
-#define SCALE 10
+#define WINDOW_W  800
+#define WINDOW_H  800
+#define SCALE 6
 
 //Cell structure definition
 struct cell {
-  int x, y, state;
+  long long int x, y, state;
 };
 typedef struct cell cell;
 
