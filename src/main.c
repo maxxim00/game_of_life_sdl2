@@ -22,7 +22,7 @@ int main() {
 
   //To run before loop  
   init_cells();
-  temp_debug_file(f);
+  //temp_debug_file(f);
 
   //sandbox
   
