@@ -53,8 +53,4 @@ To build and run the project, follow these steps:
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-Feel free to adjust any specific details or additional instructions as needed!
+This project is licensed under the Unlicense License. See the [LICENSE](LICENSE) file for details.
