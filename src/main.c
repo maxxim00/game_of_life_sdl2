@@ -15,13 +15,11 @@ int main() {
   SDL_Window *window = SDL_CreateWindow("conway", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_W, WINDOW_H, 0);
   SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
   SDL_Event event;
-  FILE *f = fopen("debug", "w");
 
-
-  //To run before loop  
+  //Run before loop  
   init_cells();
   
-  //timing
+  //FPS
   Uint64 start, end;
   double elapsed, time = 1.0f;
     
@@ -29,8 +27,7 @@ int main() {
   while(running) {
   start = SDL_GetPerformanceCounter();
 
-
-    //input check
+    //Input check
     if(SDL_PollEvent(&event)) {
       switch (event.type) {
         case SDL_KEYDOWN:
@@ -45,17 +42,17 @@ int main() {
     clear_screen(renderer);
     
     
-    //Drawing on screen
+    //Drawing
     draw_grid_lines(renderer);
     draw_cells(renderer);
 
     //Update
     update_cell();
 
-    SDL_RenderPresent(renderer);
 
-   
-    //Calculation of delay to keep 60fps
+    SDL_RenderPresent(renderer);
+  
+    //Calculate delay
     end = SDL_GetPerformanceCounter();
     elapsed = (end - start) / (float)SDL_GetPerformanceCounter() * 1000.0f;
     SDL_Delay(floor(16.666f - elapsed));
@@ -63,7 +60,6 @@ int main() {
   }
 
   //Destroy and quit
-  fclose(f);
   SDL_DestroyWindow(window);
   SDL_DestroyRenderer(renderer);
   SDL_Quit();
