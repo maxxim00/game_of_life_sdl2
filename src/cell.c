@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 //Definition
-#define PROBABILITY_FACTOR 5
+#define PROBABILITY_FACTOR 2
 
 //Private functions
 int count_neighbors(int x, int y);
@@ -11,33 +11,27 @@ void apply_rules(int neighbors, int x, int y);
 void assign_state();
 
 //Declaration 
-cell *cells[WINDOW_W / SCALE][WINDOW_H / SCALE];
-cell *next_cells[WINDOW_W / SCALE][WINDOW_H / SCALE];
+cell *cells[X][Y];
+cell *next_cells[X][Y];
+
+//Variables
 
 //Public
 void update_cell() {
-  for(int i = 0; i < WINDOW_W / SCALE; ++i) {
-    for(int j = 0; j < WINDOW_H / SCALE; ++j) {
-
-      if(i == 0 || j == 0 || j == (WINDOW_H / SCALE) - 1 || i == (WINDOW_W / SCALE) - 1) {
-      //todo: impl the edge calc
-      cells[i][j]->state = cells[i][j]->state; 
-
-       }else {
-        
-        int alive_neighbors = count_neighbors(i, j);
-        apply_rules(alive_neighbors, i, j);
-      }
+  for(int i = 0; i < X; ++i) {
+    for(int j = 0; j < Y; ++j) {
+       
+      int alive_neighbors = count_neighbors(i, j);
+      apply_rules(alive_neighbors, i, j);
     }
   }
-
   assign_state();
 }
 
 //Allocate and initialise cells
 void init_cells() {
-  for(int i = 0; i < WINDOW_W / SCALE; ++i) {
-    for(int j = 0; j < WINDOW_H / SCALE; ++j) {
+  for(int i = 0; i < X; ++i) {
+    for(int j = 0; j < Y; ++j) {
       cells[i][j] = malloc(sizeof(cell));
       next_cells[i][j] = malloc(sizeof(cell));
 
@@ -52,8 +46,8 @@ void init_cells() {
 
 //Private
 void assign_state() {
-  for(int i = 0; i < WINDOW_W / SCALE; ++i) {
-    for(int j = 0; j < WINDOW_H / SCALE; ++j) {
+  for(int i = 0; i < X; ++i) {
+    for(int j = 0; j < Y; ++j) {
       cells[i][j]->state = next_cells[i][j]->state; 
     }
   }
@@ -61,16 +55,17 @@ void assign_state() {
 
 int count_neighbors(int x, int y) {
   int count = 0;
-
-  for(int i = -1; i <= 1; ++i) {
-    for(int j = -1; j <= 1; ++j) {
-      // Boundary check
-      count += cells[i + x][j + y]->state;
+  int modx = 0;
+  int mody = 0;
+  
+  for(int i = -1; i < 2; ++i) {
+    for(int j = -1; j < 2; ++j) {
+      modx = ((x + i + X) % (X));
+      mody = ((y + j + Y) % (Y));
+      count += cells[modx][mody]->state;
     }
   }
-
   count -= cells[x][y]->state;
-
   return count;
 }
 

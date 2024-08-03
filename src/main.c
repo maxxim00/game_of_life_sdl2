@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdio.h>
 
 #include "core.h"
 #include "cell.h"
@@ -18,20 +19,31 @@ int main() {
 
   //Run before loop  
   init_cells();
+
+  //counter for generations
+  unsigned long long int gen_count = 0;
   
-  //FPS
+  //FPS TEMP
   Uint64 start, end;
   double elapsed, time = 1.0f;
     
   bool running = true;
   while(running) {
-  start = SDL_GetPerformanceCounter();
+  //gen counter to draw on screen
+  //printf("Generation: %llu\n", gen_count);
+  
+  start = SDL_GetPerformanceCounter(); //TEMP
 
-    //Input check
+        //Input check
     if(SDL_PollEvent(&event)) {
       switch (event.type) {
         case SDL_KEYDOWN:
+          //Escape
           running = event.key.keysym.scancode != SDL_SCANCODE_ESCAPE;
+          // //Temp update test
+          // if(event.key.keysym.sym == SDLK_UP) {
+          //   update_cell();
+          // }
           break;
         case SDL_QUIT:
           running = false;
@@ -52,11 +64,14 @@ int main() {
 
     SDL_RenderPresent(renderer);
   
-    //Calculate delay
+    //Calculate delay TEMP
     end = SDL_GetPerformanceCounter();
     elapsed = (end - start) / (float)SDL_GetPerformanceCounter() * 1000.0f;
     SDL_Delay(floor(16.666f - elapsed));
     time += 0.1f;
+
+    
+    gen_count++;
   }
 
   //Destroy and quit

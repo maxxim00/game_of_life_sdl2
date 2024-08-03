@@ -2,8 +2,12 @@
 #define CELL_H
 
 #define WINDOW_W  800
-#define WINDOW_H  400
+#define WINDOW_H  800
+
 #define SCALE 5
+
+#define X WINDOW_W / SCALE
+#define Y WINDOW_H / SCALE
 
 //Cell structure definition
 struct cell {
@@ -12,8 +16,8 @@ struct cell {
 typedef struct cell cell;
 
 //2D array of cells
-extern cell *cells[WINDOW_W / SCALE][WINDOW_H / SCALE];
-extern cell *next_cells[WINDOW_W / SCALE][WINDOW_H / SCALE];
+extern cell *cells[X][Y];
+extern cell *next_cells[X][Y];
 
 //Initialize cells with random states
 void init_cells();
