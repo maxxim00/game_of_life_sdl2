@@ -6,8 +6,9 @@ This project is an implementation of Conway's Game of Life using SDL2 and C. It 
 
 ### Todo:
 - Add wrap-around feature for the world | **DONE**
-- Optimization
+- Display data
 - Player control
+- Optimization
 - Cross-platform support
 
 ![board](https://github.com/maxxim00/game_of_life_sdl2/blob/main/img/image.jpg?raw=true)
