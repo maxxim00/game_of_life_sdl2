@@ -1,6 +1,7 @@
 #include "render.h"
 #include "cell.h"
 
+//Draw cells
 void draw_cells(SDL_Renderer *renderer) {  
 SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 SDL_Rect rect;
@@ -19,6 +20,7 @@ for(int i = 0; i < GRID_W; ++i) {
   }
 }
 
+//Draw grid borders
 void draw_grid_borders(SDL_Renderer *renderer) {
   SDL_SetRenderDrawColor(renderer, 200, 100, 100, 255);
   
@@ -28,6 +30,7 @@ void draw_grid_borders(SDL_Renderer *renderer) {
   SDL_RenderDrawLine(renderer, 0, WINDOW_H, WINDOW_W, WINDOW_H);
 }
 
+//Draw all grid lines (Vertical + Horizontal)
 void draw_grid_lines(SDL_Renderer *renderer) {
   SDL_SetRenderDrawColor(renderer, 200, 200, 200, 255);
 
@@ -40,7 +43,7 @@ void draw_grid_lines(SDL_Renderer *renderer) {
   } 
 }
 
-
+//Clear screen
 void clear_screen(SDL_Renderer *renderer) {
   SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255);
   SDL_RenderClear(renderer);

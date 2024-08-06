@@ -3,6 +3,7 @@
 #include "init.h"
 #include "cell.h"
 
+//Initialize SDL2
 void init_sdl(SDL_Window **window, SDL_Renderer **renderer) {
   if(SDL_Init(SDL_INIT_VIDEO) != 0) {
     fprintf(stderr, "SDL_Init Error: %s\n", SDL_GetError());
@@ -17,7 +18,7 @@ void init_sdl(SDL_Window **window, SDL_Renderer **renderer) {
     exit(1);
   }
 
-  *renderer = SDL_CreateRenderer(*window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+  *renderer = SDL_CreateRenderer(*window, -1, SDL_RENDERER_ACCELERATED);
   if(*renderer == NULL) {
     fprintf(stderr, "SDL_CreateRenderer Error: %s\n", SDL_GetError());
     SDL_DestroyWindow(*window);

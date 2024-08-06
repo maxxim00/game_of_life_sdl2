@@ -4,15 +4,17 @@
 
 #define PROBABILITY_FACTOR 2
 
-//Private
+//Private functions
 int count_neighbors(int x, int y);
 void apply_rules(int neighbors, int x, int y);
 void assign_state();
+
+//Declaration cell variable
+cell cells[GRID_W * GRID_H];
 cell next_cells[GRID_W * GRID_H];
 
-cell cells[GRID_W * GRID_H];
-
-//Public
+//Public functions
+//Update the cells: count neighbors, apply rules and assign state
 void update_cells() {
   for(int i = 0; i < GRID_W; ++i) {
     for(int j = 0; j < GRID_H; ++j) {
@@ -24,21 +26,20 @@ void update_cells() {
   assign_state();
 }
 
+//Initialize cells (position, random state)
 void init_cells() {
   for(int i = 0; i < GRID_W; ++i) {
     for(int j = 0; j < GRID_H; ++j) {
       int index = i * GRID_H + j;
-      // cells[i][j] = malloc(sizeof(cell));
-      // next_cells[i][j] = malloc(sizeof(cell));
 
       cells[index].x = i;
       cells[index].y = j;
-      cells[index].state = (rand() % PROBABILITY_FACTOR == 1) ? 1 : 0;
+      cells[index].state = (rand() % PROBABILITY_FACTOR == 1) ? 1 : 0; //One in PROBABILITY_FACTOR to be alive
     }
   }
 }
 
-//Private
+//Private functions
 void assign_state() {
   for(int i = 0; i < GRID_W; ++i) {
     for(int j = 0; j < GRID_H; ++j) {
@@ -48,6 +49,7 @@ void assign_state() {
   }
 }
 
+//Count neighboring cells (3x3 square)
 int count_neighbors(int x, int y) {
   int count = 0;
   int modx = 0;
@@ -67,6 +69,7 @@ int count_neighbors(int x, int y) {
 //Apply Conway's rules
 void apply_rules(int neighbors, int x, int y) {
   int index = x * GRID_H + y;
+
   if(cells[index].state == 0 && neighbors == 3) {
     next_cells[index].state = 1;
   } 
