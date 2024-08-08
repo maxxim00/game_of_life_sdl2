@@ -5,6 +5,8 @@
 #include "loop.h"
 #include "cell.h"
 
+//Add stats display (stat_display branch)
+
 int main() {
   SDL_Window *window;
   SDL_Renderer * renderer;
