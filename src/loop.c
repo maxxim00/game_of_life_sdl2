@@ -17,19 +17,19 @@ void main_loop(SDL_Renderer *renderer) {
   Uint64 frequency = SDL_GetPerformanceFrequency();
   
   while(running) {
-  start = SDL_GetPerformanceCounter();
-    
-  handle_events(&running);
- 
-  clear_screen(renderer);
-    
-  draw_cells(renderer);
-  draw_grid_borders(renderer);
-  
-    
-  update_cells();
+    start = SDL_GetPerformanceCounter();
 
-  SDL_RenderPresent(renderer);
+    //Update
+    handle_events(&running);
+    update_cells();
+
+    //Draw
+    clear_screen(renderer);
+    
+    draw_cells(renderer);
+    draw_grid_borders(renderer);
+  
+    SDL_RenderPresent(renderer);
 
     end = SDL_GetPerformanceCounter();
     elapsed = (end - start) / (double)frequency * 1000.f;
@@ -43,11 +43,11 @@ static void handle_events(bool *running) {
   SDL_Event event;
   while(SDL_PollEvent(&event)) {
     switch(event.type) {
-      
       case SDL_KEYDOWN:
         if(event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
           *running = false;
         }
+        break;
       case SDL_QUIT:
         *running = false;
         break;
