@@ -1,6 +1,5 @@
 #include "cell.h"
-
-#include <stdlib.h>
+#include "debug.h"
 
 #define PROBABILITY_FACTOR 2
 
@@ -16,13 +15,24 @@ cell next_cells[GRID_W * GRID_H];
 //Public functions
 //Update the cells: count neighbors, apply rules and assign state
 void update_cells() {
+  int alive_cells = 0;
+  int dead_cells  = 0;
   for(int i = 0; i < GRID_W; ++i) {
     for(int j = 0; j < GRID_H; ++j) {
+      int index = i * GRID_H + j;
       
       int alive_neighbors = count_neighbors(i, j);
       apply_rules(alive_neighbors, i, j);
+
+      if(cells[index].state == 1) {
+        alive_cells++;
+      }else {
+        dead_cells++;
+      }
     }
   }
+  debug_data->a_cells = alive_cells;
+  debug_data->d_cells = dead_cells;
   assign_state();
 }
 

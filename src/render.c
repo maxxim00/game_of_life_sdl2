@@ -4,14 +4,14 @@
 
 //Draw statestics
 void draw_stats(SDL_Renderer *renderer) {
-  SDL_SetRenderDrawColor(renderer, 200, 80, 80, 230);
+  SDL_SetRenderDrawColor(renderer, 100, 80, 80, 230);
   SDL_Rect box = {0, WINDOW_H, 300, -200};
 
   SDL_RenderFillRect(renderer, &box);
 
-  //temp
-  printf("\nFPS: %f\nAlive cells: %d\nDead cels: %d\nAll cells: %d\n", 
-         debug_data->fps, debug_data->a_cells, debug_data->d_cells, debug_data->all_cells);
+  // //temp
+  // printf("\nFPS: %f\nAlive cells: %d\nDead cels: %d\nTPF: %f\n", 
+  //        debug_data->fps, debug_data->a_cells, debug_data->d_cells, debug_data->tpf);
 }
 
 //Draw cells

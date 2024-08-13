@@ -16,7 +16,7 @@ void init_sdl(SDL_Window **window, SDL_Renderer **renderer) {
       SDL_Quit();
       exit(1);
     }
-  TTF_Font *font = TTF_OpenFont("assets/fonts/ticketing.ttf", 24);
+  TTF_Font *font = TTF_OpenFont("assets/fonts/roboto.ttf", 24);
 
   *window = SDL_CreateWindow("Conway's Game of Life", 
   SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_W, WINDOW_H, SDL_WINDOW_SHOWN);

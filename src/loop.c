@@ -8,10 +8,11 @@
 #define FRAME_DURATION_MS 16.666666
 
 //Private
-static void handle_events(bool *running);
+static void handle_events(bool *running, bool *show_stats);
 
 void main_loop(SDL_Renderer *renderer) {
   bool running = true;
+  bool show_stats = false;
 
   Uint64 start, end;
   double elapsed;
@@ -21,7 +22,7 @@ void main_loop(SDL_Renderer *renderer) {
     start = SDL_GetPerformanceCounter();
 
     //Update
-    handle_events(&running);
+    handle_events(&running, &show_stats);
     update_cells();
 
     //Draw
@@ -29,7 +30,9 @@ void main_loop(SDL_Renderer *renderer) {
     
     draw_cells(renderer);
     draw_grid_borders(renderer);
-    draw_stats(renderer);
+
+    //stats
+    if(show_stats)draw_stats(renderer);
   
     SDL_RenderPresent(renderer);
 
@@ -40,11 +43,12 @@ void main_loop(SDL_Renderer *renderer) {
     if(elapsed < FRAME_DURATION_MS - elapsed) {
       SDL_Delay((Uint32)(FRAME_DURATION_MS - elapsed));
     }
-    debug_data->fps = 1.0f / ((end - start) / (double)frequency);
+    debug_data->fps = 10.0f / ((end - start) / (double)frequency * FRAME_DURATION_MS);
+    debug_data->tpf = elapsed / 1000.f;
   }
 }
 
-static void handle_events(bool *running) {
+static void handle_events(bool *running, bool *show_stats) {
   SDL_Event event;
   while(SDL_PollEvent(&event)) {
     switch(event.type) {
@@ -52,6 +56,7 @@ static void handle_events(bool *running) {
         if(event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
           *running = false;
         }
+        if(event.key.keysym.scancode == SDL_SCANCODE_D && *show_stats == true){*show_stats = false;}else{*show_stats = true;}
         break;
       case SDL_QUIT:
         *running = false;
