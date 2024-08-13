@@ -3,8 +3,9 @@
 #include "loop.h"
 #include "cell.h"
 #include "render.h"
+#include "debug.h"
 
-#define FRAME_DURATION_MS 16.666
+#define FRAME_DURATION_MS 16.666666
 
 //Private
 static void handle_events(bool *running);
@@ -28,14 +29,18 @@ void main_loop(SDL_Renderer *renderer) {
     
     draw_cells(renderer);
     draw_grid_borders(renderer);
+    draw_stats(renderer);
   
     SDL_RenderPresent(renderer);
 
     end = SDL_GetPerformanceCounter();
+
+    
     elapsed = (end - start) / (double)frequency * 1000.f;
     if(elapsed < FRAME_DURATION_MS - elapsed) {
       SDL_Delay((Uint32)(FRAME_DURATION_MS - elapsed));
     }
+    debug_data->fps = 1.0f / ((end - start) / (double)frequency);
   }
 }
 
