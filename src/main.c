@@ -5,6 +5,8 @@
 #include "loop.h"
 #include "cell.h"
 
+//Add stats display (stat_display branch)
+
 int main() {
   SDL_Window *window;
   SDL_Renderer * renderer;
@@ -19,6 +21,7 @@ int main() {
   //Destroy & quit
   SDL_DestroyWindow(window);
   SDL_DestroyRenderer(renderer);
+  TTF_Quit();
   SDL_Quit();
   return 0;
 }
