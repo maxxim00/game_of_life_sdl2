@@ -4,6 +4,8 @@
 #include "cell.h"
 #include "debug.h"
 
+TTF_Font *font;
+   
 //Initialize SDL2
 void init_sdl(SDL_Window **window, SDL_Renderer **renderer) {
   if(SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -16,7 +18,7 @@ void init_sdl(SDL_Window **window, SDL_Renderer **renderer) {
       SDL_Quit();
       exit(1);
     }
-  TTF_Font *font = TTF_OpenFont("assets/fonts/roboto.ttf", 24);
+  font = TTF_OpenFont("assets/fonts/roboto.ttf", 24);
 
   *window = SDL_CreateWindow("Conway's Game of Life", 
   SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_W, WINDOW_H, SDL_WINDOW_SHOWN);

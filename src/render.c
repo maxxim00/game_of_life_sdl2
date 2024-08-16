@@ -1,17 +1,55 @@
+
 #include "render.h"
 #include "cell.h"
 #include  "debug.h"
 
-//Draw statestics
-void draw_stats(SDL_Renderer *renderer) {
-  SDL_SetRenderDrawColor(renderer, 100, 80, 80, 230);
-  SDL_Rect box = {0, WINDOW_H, 300, -200};
+#define FONT_SIZE 2
 
+//Draw statestics
+void draw_stats(SDL_Renderer *renderer, TTF_Font *font) {
+  
+  /*Draw rect*/
+  SDL_SetRenderDrawColor(renderer, 100, 80, 80, 230);
+  SDL_Rect box = {0, WINDOW_H - 200, 300, 200};
   SDL_RenderFillRect(renderer, &box);
 
-  // //temp
-  // printf("\nFPS: %f\nAlive cells: %d\nDead cels: %d\nTPF: %f\n", 
-  //        debug_data->fps, debug_data->a_cells, debug_data->d_cells, debug_data->tpf);
+  SDL_Color white = {255, 255, 255, 255};
+  
+  /*Draw text fps*/
+  char fps_txt[20];
+  SDL_Rect msg_rect_fps = {0, WINDOW_H - 200, 75 * FONT_SIZE, 25 * FONT_SIZE};
+  snprintf(fps_txt, sizeof(fps_txt),"FPS: %.0f", debug_data->fps);
+  SDL_Surface *surf_msg; 
+  SDL_Texture *msg; 
+
+  surf_msg = TTF_RenderText_Solid(font, fps_txt, white);
+  msg = SDL_CreateTextureFromSurface(renderer, surf_msg);
+  
+  SDL_RenderCopy(renderer, msg, NULL, &msg_rect_fps);
+
+  /*tps*/
+  memset(fps_txt, 0, sizeof(fps_txt));
+  SDL_Rect msg_rect_tpf = {0, WINDOW_H - 200 + 50, 100 * FONT_SIZE, 25 * FONT_SIZE};
+  snprintf(fps_txt, sizeof(fps_txt), "TPF: %.5f", debug_data->tpf);
+  surf_msg = TTF_RenderText_Solid(font, fps_txt, white);
+  msg = SDL_CreateTextureFromSurface(renderer, surf_msg);
+  SDL_RenderCopy(renderer, msg, NULL, &msg_rect_tpf);
+
+  /*alive cells*/
+  memset(fps_txt, 0, sizeof(fps_txt));
+  SDL_Rect msg_rect_a_cells = {0, WINDOW_H - 200 + 100, 75 * FONT_SIZE, 25 * FONT_SIZE};
+  snprintf(fps_txt, sizeof(fps_txt), "A CELLS: %.2d", debug_data->a_cells);
+  surf_msg = TTF_RenderText_Solid(font, fps_txt, white);
+  msg = SDL_CreateTextureFromSurface(renderer, surf_msg);
+  SDL_RenderCopy(renderer, msg, NULL, &msg_rect_a_cells);
+
+  /*dead cells*/
+  memset(fps_txt, 0, sizeof(fps_txt));
+  SDL_Rect msg_rect_d_cells = {0, WINDOW_H - 200 + 150, 75 * FONT_SIZE, 25 * FONT_SIZE};
+  snprintf(fps_txt, sizeof(fps_txt), "D CELLS: %.2d", debug_data->d_cells);
+  surf_msg = TTF_RenderText_Solid(font, fps_txt, white);
+  msg = SDL_CreateTextureFromSurface(renderer, surf_msg);
+  SDL_RenderCopy(renderer, msg, NULL, &msg_rect_d_cells);
 }
 
 //Draw cells

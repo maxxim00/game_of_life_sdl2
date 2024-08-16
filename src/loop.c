@@ -4,6 +4,7 @@
 #include "cell.h"
 #include "render.h"
 #include "debug.h"
+#include "init.h"
 
 #define FRAME_DURATION_MS 16.666666
 
@@ -32,7 +33,7 @@ void main_loop(SDL_Renderer *renderer) {
     draw_grid_borders(renderer);
 
     //stats
-    if(show_stats)draw_stats(renderer);
+    if(show_stats)draw_stats(renderer, font);
   
     SDL_RenderPresent(renderer);
 
