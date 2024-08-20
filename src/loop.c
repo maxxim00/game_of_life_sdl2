@@ -57,7 +57,8 @@ static void handle_events(bool *running, bool *show_stats) {
         if(event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
           *running = false;
         }
-        if(event.key.keysym.scancode == SDL_SCANCODE_D && *show_stats == true){*show_stats = false;}else{*show_stats = true;}
+        if(event.key.keysym.scancode == SDL_SCANCODE_D && *show_stats == true){*show_stats = false;}
+        else if(event.key.keysym.scancode == SDL_SCANCODE_D && *show_stats == false){*show_stats = true;}
         break;
       case SDL_QUIT:
         *running = false;
