@@ -1,7 +1,7 @@
 #include <stdlib.h>
 
 struct stat_data {
-  float fps, tpf;
+  double fps, tpf;
   int a_cells, d_cells; //Alive dead cells
 };
 typedef struct stat_data stat_data;

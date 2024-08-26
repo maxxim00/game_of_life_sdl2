@@ -18,7 +18,7 @@ void draw_stats(SDL_Renderer *renderer, TTF_Font *font) {
   /*Draw text fps*/
   char fps_txt[20];
   SDL_Rect msg_rect_fps = {0, WINDOW_H - 200, 75 * FONT_SIZE, 25 * FONT_SIZE};
-  snprintf(fps_txt, sizeof(fps_txt),"FPS: %.0f", debug_data->fps);
+  snprintf(fps_txt, sizeof(fps_txt),"FPS: %.2f", debug_data->fps);
   SDL_Surface *surf_msg; 
   SDL_Texture *msg; 
 

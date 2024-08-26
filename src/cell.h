@@ -3,10 +3,10 @@
 
 #include <SDL2/SDL.h>
 
-#define SCALE 4
+#define SCALE 2
 
-#define WINDOW_W  800
-#define WINDOW_H  800
+#define WINDOW_W  1000
+#define WINDOW_H  1000
 
 #define GRID_W (WINDOW_W / SCALE)
 #define GRID_H (WINDOW_H / SCALE)

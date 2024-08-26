@@ -6,8 +6,6 @@
 #include "debug.h"
 #include "init.h"
 
-#define FRAME_DURATION_MS 16.666666
-
 //Private
 static void handle_events(bool *running, bool *show_stats);
 
@@ -15,9 +13,9 @@ void main_loop(SDL_Renderer *renderer) {
   bool running = true;
   bool show_stats = false;
 
-  Uint64 start, end;
-  double elapsed;
-  Uint64 frequency = SDL_GetPerformanceFrequency();
+  Uint64 perf_freq = SDL_GetPerformanceFrequency();
+  Uint64 start, elapsed;
+  double fps = 0, frame_time = 16.66666f;
   
   while(running) {
     start = SDL_GetPerformanceCounter();
@@ -37,15 +35,19 @@ void main_loop(SDL_Renderer *renderer) {
   
     SDL_RenderPresent(renderer);
 
-    end = SDL_GetPerformanceCounter();
+    //frame rate cap and time per frame
+    elapsed = SDL_GetPerformanceCounter() - start;
+    double elapsed_ms= ((double)elapsed / perf_freq) * 1000.0f;
 
-    
-    elapsed = (end - start) / (double)frequency * 1000.f;
-    if(elapsed < FRAME_DURATION_MS - elapsed) {
-      SDL_Delay((Uint32)(FRAME_DURATION_MS - elapsed));
+    if(elapsed_ms <= frame_time) {
+      double delay_time = frame_time - elapsed_ms;
+      SDL_Delay(delay_time);
+      fps = 1000.0f / (delay_time + elapsed_ms);
+    }else {
+      fps = 1000.0f / elapsed_ms;
     }
-    debug_data->fps = 10.0f / ((end - start) / (double)frequency * FRAME_DURATION_MS);
-    debug_data->tpf = elapsed / 1000.f;
+    debug_data->fps = fps;
+    debug_data->tpf = elapsed_ms;
   }
 }
 
